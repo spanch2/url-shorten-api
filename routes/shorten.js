@@ -29,6 +29,9 @@ router.post('/shorten', async (req, res) => {
             }
         } else { 
             alias = nanoid(4);
+            while (await Url.findOne({ alias: alias }, '').exec()) {
+                alias = nanoid(4);
+            }
         }
         const shortUrl = `${urlBase}/${alias}`;
         try {

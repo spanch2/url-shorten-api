@@ -12,9 +12,8 @@ app.use(express.urlencoded({extended: true}));
 app.use('/api', api);
 app.use('/', redirect)
 
-const port = 3000;
-const host = 'localhost';
+const port = process.env.PORT || 80
 
-app.listen(port, host, () => {
-    console.log(`Server started at ${host} port ${port}`);
+app.listen(port, () => {
+    console.log(`Server started at port ${port}`);
 });
