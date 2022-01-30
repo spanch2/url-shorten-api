@@ -35,7 +35,7 @@ Note: alias is optional
 #### Response
 
 ```
-{"alias":"0Esj","longUrl":"<Desired Url>","shortUrl":"https://secret-atoll-61569.herokuapp.com/<Alias>"}
+{"alias":"<Alias>","longUrl":"<Desired Url>","shortUrl":"https://secret-atoll-61569.herokuapp.com/<Alias>"}
 ```
 ### Use shortened URL
 
