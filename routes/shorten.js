@@ -44,7 +44,7 @@ router.post('/shorten', async (req, res) => {
             });
 
             await urlDoc.save();
-            res.json(urlDoc);
+            res.json({alias: urlDoc.alias, longUrl: urlDoc.longUrl, shortUrl: urlDoc.shortUrl});
         } catch (error) {
             console.log(error);
             return res.status(500).json('Server Error');
