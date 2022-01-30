@@ -2,9 +2,9 @@
 
 This is a URL Shortener API built using Express.js and MongoDB (using the Mongoose ODM).
 
-The main application is in the App.js file.
-The schema for Mongoose is defined in /models/url.js.
-Routes for the API are defined in the routes directory.
+The main application is in the App.js file.  
+The schema for Mongoose is defined in /models/url.js.  
+Routes for the API are defined in the routes directory.  
 
 Currently deployed at https://secret-atoll-61569.herokuapp.com/
 
@@ -28,8 +28,8 @@ curl --location --request POST 'https://secret-atoll-61569.herokuapp.com/api/sho
 Content-Type: application/x-www-form-urlencoded
 
 ##### Body
-url=<Desired URL>
-alias=<Alias>
+url=Desired URL  
+alias=Alias  
 Note: alias is optional
 
 #### Response
