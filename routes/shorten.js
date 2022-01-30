@@ -8,6 +8,7 @@ router.post('/shorten', async (req, res) => {
     let longUrl = req.body.url;
     const urlBase = process.env.URL_BASE;
     let reqAlias = req.body.alias;
+    res.header("Access-Control-Allow-Origin", "*");
     if (!longUrl) {
         return res.status(400).json('Missing URL');
     }
