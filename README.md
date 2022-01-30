@@ -8,13 +8,13 @@ Routes for the API are defined in the routes directory.
 
 Currently deployed at https://secret-atoll-61569.herokuapp.com/
 
-##Use
+## Use
 
 The API is described below.
 
-####Generate new shortened URL
+#### Generate new shortened URL
 
-#####Request
+##### Request
 
 POST /api/shorten
 ```
@@ -24,16 +24,19 @@ curl --location --request POST 'https://secret-atoll-61569.herokuapp.com/api/sho
 --data-urlencode 'alias=<Alias>'
 ```
 
-######Headers
+###### Headers
 Content-Type: application/x-www-form-urlencoded
 
-######Body
+###### Body
 url=<Desired URL>
 alias=<Alias>
 Note: alias is optional
 
-#####Response
+##### Response
 
 ```
-
+{"alias":"0Esj","longUrl":"<Desired Url>","shortUrl":"https://secret-atoll-61569.herokuapp.com/<Alias>"}
 ```
+#### Use shortened URL
+
+Simply use the returned shortURL in a browser. This sends a GET request, which redirects the user to the desired longURL.
