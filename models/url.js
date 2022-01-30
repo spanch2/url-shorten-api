@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // uid will be used for retrieving and displaying urls for specific users once authentication is implemented
 // lastUsed will be used to remove urls that have not been used in a long time
 
-var UrlSchema = new Schema({
-    urlCode: {
+export const UrlSchema = new Schema({
+    alias: {
         type: String,
         required: true,
     },
@@ -25,8 +25,8 @@ var UrlSchema = new Schema({
     lastUsed: {
         type: Date,
         required: true,
-        default: Date.now,
+        default: Date.now(),
     }
 })
 
-module.exports = mongoose.model('UrlModel', UrlSchema)
+export const Url = mongoose.model('Url', UrlSchema);

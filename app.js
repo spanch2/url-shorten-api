@@ -1,8 +1,14 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const connectToDB = require('./config/db')
+import { connectToDB } from './config/db.js'
+import api from './routes/shorten.js'
 
 connectToDB();
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.use('/api', api);
 
 const port = 3000;
 const host = 'localhost';
