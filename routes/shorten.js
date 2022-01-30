@@ -1,21 +1,41 @@
-import express from 'express'
+import express from 'express';
 export const router = express.Router();
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 import { Url } from '../models/url.js';
 import isURL from 'validator/lib/isURL.js';
 
 router.post('/shorten', async (req, res) => {
-    const url = req.body.url;
+    let longUrl = req.body.url;
     const urlBase = process.env.URL_BASE;
-
-    if (isURL(url)) {
-        const alias = nanoid(4);
+    let reqAlias = req.body.alias;
+    if (!longUrl) {
+        return res.status(400).json('Missing URL');
+    }
+    if (isURL(longUrl)) {
+        if (!isURL(longUrl, {require_protocol: true})) {
+            longUrl = 'http://' + longUrl;
+        }
+        let alias;
+        if (reqAlias) {
+            if (reqAlias.length < 4) {
+                return res.status(400).json('Alias must be at least 4 characters');
+            } 
+            const existing = await Url.findOne({ alias: reqAlias }, '').exec();
+            console.log(existing);
+            if (existing) {
+                return res.status(409).json('Alias unavailable');
+            } else {
+                alias = reqAlias;
+            }
+        } else { 
+            alias = nanoid(4);
+        }
         const shortUrl = `${urlBase}/${alias}`;
         try {
             const urlDoc = new Url({
                 alias,
                 uid: "guest",
-                longUrl: url,
+                longUrl,
                 shortUrl,
                 lastUsed: Date.now(),
             });
@@ -24,10 +44,10 @@ router.post('/shorten', async (req, res) => {
             res.json(urlDoc);
         } catch (error) {
             console.log(error);
-            res.status(500).json('Server Error');
+            return res.status(500).json('Server Error');
         }
     } else {
-        res.status(400).json('Invalid URL');
+        return res.status(400).json('Invalid URL');
     }
 })
 
